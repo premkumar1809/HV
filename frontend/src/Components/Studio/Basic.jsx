@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Basic() {
-  const backendURL = "http://localhost:3000"
+  const backendURL = "https://hv-95uq.onrender.com"
   const [Email, setEmail] = useState("");
   const [channelName, setChannelName] = useState();
   const [channelDescription, setChannelDescription] = useState();
