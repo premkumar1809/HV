@@ -22,7 +22,7 @@ import { RxCross1 } from "react-icons/rx";
 import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 
 function Navbar() {
-  const backendURL = "https://youtube-clone-mern-backend.vercel.app"
+  const backendURL = "http://localhost:3000"
   const { data } = useParams();
   const [data2, setData] = useState(data);
   const [isbtnClicked, setisbtnClicked] = useState(false);
