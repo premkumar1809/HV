@@ -12,26 +12,21 @@ const Comments = require("./comments");
 const Studio = require("./studio");
 const app = express();
 
+// Use CORS middleware for the entire app
 app.use(cors());
+
 // Middlewares
-router.use(
-  cors({
-    origin: ["https://main--holevideos.netlify.app/"],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
-);
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(auth);
-router.use(Channel);
-router.use(Videos);
-router.use(Likes);
-router.use(Comments);
-router.use(Studio);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(auth);
+app.use(Channel);
+app.use(Videos);
+app.use(Likes);
+app.use(Comments);
+app.use(Studio);
 
 router.get("/", (req, res) => {
-  res.send("Welcome to Youtube App Backend!");
+  res.send("Welcome to HOLE VIDEOS Backend!");
 });
 
-module.exports = router;
+module.exports = app;
