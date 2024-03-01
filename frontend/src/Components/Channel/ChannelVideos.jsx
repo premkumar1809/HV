@@ -1,23 +1,36 @@
 import { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
-import { useNavigate } from "react-router-dom";
+import PlaylistPlayIcon from "@mui/icons-material/PlaylistPlay";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import deleteIMG from "../../img/delete.jpg";
 
-function ChannelVideos(prop) {
-  const backendURL = "https://youtube-clone-mern-backend.vercel.app"
-  const [myVideos, setMyVideos] = useState([]);
-  const [Email, setEmail] = useState();
-  const [videosort, setVideoSort] = useState();
+function generateRandomColors(count) {
+  const transparency = 0.7; // Adjust transparency as needed (0 to 1)
+  const colors = [];
+
+  for (let i = 0; i < count; i++) {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    colors.push(`rgba(${r}, ${g}, ${b}, ${transparency})`);
+  }
+
+  return colors;
+}
+
+function ChannelPlaylists(prop) {
+  const backendURL = "http://localhost:3000"
+  const [PlaylistData, setPlaylistData] = useState([]);
+  const [email, setEmail] = useState();
+  const [playlistColors, setPlaylistColors] = useState([]);
   const token = localStorage.getItem("userToken");
   const [loading, setLoading] = useState(true);
-  const [showDiv, setShowDiv] = useState(false);
+  const sampleArr = [1, 2, 3, 4];
   const [theme, setTheme] = useState(() => {
     const Dark = localStorage.getItem("Dark");
     return Dark ? JSON.parse(Dark) : true;
   });
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
@@ -28,353 +41,220 @@ function ChannelVideos(prop) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 3500);
+    }, 3200);
   }, []);
 
   useEffect(() => {
-    function handleResize() {
-      setShowDiv(window.innerWidth <= 600);
-    }
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    // Generate colors based on the length of PlaylistData array
+    const colors = generateRandomColors(Math.max(1, PlaylistData.length));
+    setPlaylistColors(colors);
+  }, [PlaylistData]);
 
   useEffect(() => {
-    const getUserVideos = async () => {
+    const getPlaylistData = async () => {
       try {
-        if (Email === prop.newmail) {
+        if (prop.newmail !== undefined) {
           const response = await fetch(
-            `${backendURL}/getuservideos/${Email}`
+            `${backendURL}/getplaylistdata/${prop.newmail}`
           );
-          const myvideos = await response.json();
-          setMyVideos(myvideos);
-        } else {
-          const response = await fetch(
-            `${backendURL}/getuservideos/${prop.newmail}`
-          );
-          const myvideos = await response.json();
-          setMyVideos(myvideos);
+          const playlistData = await response.json();
+          setPlaylistData(playlistData);
         }
       } catch (error) {
         // console.log(error.message);
       }
     };
+    getPlaylistData();
+  }, [prop.newmail]);
 
-    getUserVideos();
-  }, [Email, prop.newmail]);
+  const publicPlaylists =
+    PlaylistData &&
+    PlaylistData !== "No playlists available..." &&
+    PlaylistData.filter((item) => item.playlist_privacy === "Public");
 
-  const updateViews = async (id) => {
-    try {
-      const response = await fetch(
-        `${backendURL}/updateview/${id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      await response.json();
-    } catch (error) {
-      // console.log(error.message);
-    }
-  };
+  const noPublicPlaylists = publicPlaylists.length === 0;
 
-  useEffect(() => {
-    const sortVideos = () => {
-      switch (videosort) {
-        case "Latest":
-          setMyVideos((prevVideos) =>
-            [...prevVideos].sort(
-              (a, b) => new Date(b.uploaded_date) - new Date(a.uploaded_date)
-            )
-          );
-          break;
-        case "Popular":
-          setMyVideos((prevVideos) =>
-            [...prevVideos].sort((a, b) => b.views - a.views)
-          );
-          break;
-        case "Oldest":
-          setMyVideos((prevVideos) =>
-            [...prevVideos].sort(
-              (a, b) => new Date(a.uploaded_date) - new Date(b.uploaded_date)
-            )
-          );
-          break;
-        default:
-          break;
-      }
-    };
-
-    sortVideos();
-  }, [videosort]);
+  if (
+    (loading === false && PlaylistData === "No playlists available...") ||
+    (loading === false && PlaylistData.length === 0) ||
+    (email !== prop.newmail && noPublicPlaylists)
+  ) {
+    return (
+      <p
+        className={theme ? "no-results" : "no-results text-light-mode"}
+        style={{ color: "white", fontSize: "16px" }}
+      >
+        This channel doesn&apos;t have any playlists.
+      </p>
+    );
+  }
 
   return (
     <>
-      <div className="allvideo-sectionn">
-        <div className="video-sorting">
-          <button
-            className={
-              videosort === "Latest"
-                ? `latest-video ${theme ? "" : "btn-light-mode"} active${
-                    theme ? "" : "-light"
-                  }`
-                : `latest-video ${theme ? "" : "btn-light-mode"}`
-            }
-            onClick={() => {
-              setVideoSort("Latest");
-            }}
-          >
-            Latest
-          </button>
-          <button
-            className={
-              videosort === "Popular"
-                ? `Popular-video ${theme ? "" : "btn-light-mode"} active${
-                    theme ? "" : "-light"
-                  }`
-                : `Popular-video ${theme ? "" : "btn-light-mode"}`
-            }
-            onClick={() => {
-              setVideoSort("Popular");
-            }}
-          >
-            Popular
-          </button>
-          <button
-            className={
-              videosort === "Oldest"
-                ? `Oldest-video ${theme ? "" : "btn-light-mode"} active${
-                    theme ? "" : "-light"
-                  }`
-                : `Oldest-video ${theme ? "" : "btn-light-mode"}`
-            }
-            onClick={() => {
-              setVideoSort("Oldest");
-            }}
-          >
-            Oldest
-          </button>
-        </div>
-        <SkeletonTheme
-          baseColor={theme ? "#353535" : "#aaaaaa"}
-          highlightColor={theme ? "#444" : "#b6b6b6"}
-        >
-          <div
-            className="sk-uploadedvideos-sectionall"
-            style={loading === true ? { display: "grid" } : { display: "none" }}
-          >
-            {myVideos.length > 0 &&
-              myVideos.map((element, index) => {
-                return (
-                  <div
-                    className="uploaded-video-contents sk-uploadcontent"
-                    key={index}
-                    style={{
-                      display:
-                        element.visibility === "Public" ? "block" : "none",
-                    }}
-                  >
-                    <Skeleton
-                      count={1}
-                      width={300}
-                      height={169}
-                      style={{ borderRadius: "10px" }}
-                      className="sk-video-sec-thumbnail"
-                    />
-                    <div
-                      className="videos-metadataa sk-videosmeta"
-                      style={{ position: "relative", top: "15px" }}
-                    >
-                      <Skeleton
-                        count={2}
-                        width={280}
-                        height={18}
-                        style={{ borderRadius: "4px" }}
-                        className="sk-video-sec-title"
-                      />
-                      <div className="views-and-time">
-                        <Skeleton
-                          count={1}
-                          width={170}
-                          height={15}
-                          style={{ borderRadius: "4px" }}
-                          className="sk-video-sec-extra"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
-          <div
-            className="sk-uploadedvideos-sectionall2"
-            style={
-              loading === true && showDiv
-                ? { display: "flex" }
-                : { display: "none" }
-            }
-          >
-            {myVideos.length > 0 &&
-              myVideos.map((element, index) => {
-                return (
-                  <div
-                    className="uploaded-video-contents sk-uploadcontent"
-                    key={index}
-                    style={{
-                      display:
-                        element.visibility === "Public" ? "block" : "none",
-                    }}
-                  >
-                    <Skeleton
-                      count={1}
-                      width={300}
-                      height={169}
-                      style={{ borderRadius: "10px" }}
-                      className="sk-video-sec-thumbnail"
-                    />
-                    <div
-                      className="videos-metadataa sk-videosmeta"
-                      style={{ position: "relative", top: "15px" }}
-                    >
-                      <Skeleton
-                        count={2}
-                        width={280}
-                        height={18}
-                        style={{ borderRadius: "4px" }}
-                        className="sk-video-sec-title"
-                      />
-                      <div className="views-and-time">
-                        <Skeleton
-                          count={1}
-                          width={170}
-                          height={15}
-                          style={{ borderRadius: "4px" }}
-                          className="sk-video-sec-extra"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
-        </SkeletonTheme>
+      <SkeletonTheme
+        baseColor={theme ? "#353535" : "#aaaaaa"}
+        highlightColor={theme ? "#444" : "#b6b6b6"}
+      >
         <div
-          className="uploadedvideos-sectionall"
+          className="channel-playlist-section"
           style={
             loading === true
-              ? { visibility: "hidden", display: "none" }
-              : { visibility: "visible", display: "grid" }
+              ? { display: "block", width: "-webkit-fill-available" }
+              : { display: "none" }
           }
         >
-          {myVideos.length > 0 &&
-            myVideos.map((element, index) => {
-              return (
-                <div
-                  className={`${
-                    element.visibility === "Private"
-                      ? "not-thiss"
-                      : "uploaded-video-contents"
-                  }`}
-                  key={index}
-                  style={{
-                    display: element.visibility === "Public" ? "block" : "none",
-                  }}
-                  onClick={() => {
-                    if (token) {
-                      updateViews(element._id);
-                      setTimeout(() => {
-                        navigate(`/video/${element._id}`);
-                        window.location.reload();
-                      }, 400);
-                    } else {
-                      navigate(`/video/${element._id}`);
-                      window.location.reload();
-                    }
-                  }}
-                >
-                  <img
-                    src={element.thumbnailURL}
-                    alt="Thumbnail"
-                    className="myvidthumbnail"
-                    loading="lazy"
-                  />
-                  <p className="myvideo-duration2 duration-new">
-                    {Math.floor(element.videoLength / 60) +
-                      ":" +
-                      (Math.round(element.videoLength % 60) < 10
-                        ? "0" + Math.round(element.videoLength % 60)
-                        : Math.round(element.videoLength % 60))}
-                  </p>
-                  <div
-                    className={
-                      theme
-                        ? "videos-metadataa"
-                        : "videos-metadataa text-light-mode"
-                    }
-                  >
-                    <p>
-                      {element.Title.length <= 50
-                        ? element.Title
-                        : `${element.Title.slice(0, 50)}...`}
-                    </p>
+          <div className="created-playlist-section">
+            <Skeleton
+              count={1}
+              width={150}
+              height={16}
+              style={{ borderRadius: "4px" }}
+              className="sk-create-playlist"
+            />
+            <div className="thischannel-playlists">
+              {sampleArr &&
+                sampleArr.map(() => {
+                  return (
+                    <>
+                      <div className="created-all-playlistss">
+                        <Skeleton
+                          count={1}
+                          width={230}
+                          height={129}
+                          style={{ borderRadius: "9px" }}
+                          className="sk-playlist-thumbnail"
+                        />
+
+                        <div className="playlistt-details">
+                          <Skeleton
+                            count={1}
+                            width={150}
+                            height={18}
+                            style={{
+                              borderRadius: "4px",
+                              position: "relative",
+                              top: "23px",
+                            }}
+                            className="sk-playlist-name"
+                          />
+                          <Skeleton
+                            count={1}
+                            width={120}
+                            height={16}
+                            style={{
+                              borderRadius: "4px",
+                              position: "relative",
+                              top: "27px",
+                            }}
+                            className="sk-playlist-desc"
+                          />
+                        </div>
+                      </div>
+                    </>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
+      </SkeletonTheme>
+      <div
+        className="channel-playlist-section"
+        style={
+          loading === false
+            ? {
+                visibility: "visible",
+                display: "block",
+              }
+            : { visibility: "hidden", display: "none" }
+        }
+      >
+        <div
+          className={
+            theme
+              ? "created-playlist-section"
+              : "created-playlist-section text-light-mode"
+          }
+        >
+          <p>Created playlists</p>
+          <div className="thischannel-playlists">
+            {PlaylistData &&
+              PlaylistData !== "No playlists available..." &&
+              PlaylistData.length > 0 &&
+              PlaylistData.map((element, index) => {
+                const backgroundColor =
+                  playlistColors[index] || playlistColors[0];
+
+                return (
+                  <>
                     <div
-                      className={
-                        theme
-                          ? "views-and-time"
-                          : "views-and-time text-light-mode2"
+                      className="created-all-playlistss"
+                      key={index}
+                      style={
+                        prop.newmail !== email &&
+                        element.playlist_privacy === "Private"
+                          ? { display: "none" }
+                          : { display: "block" }
                       }
                     >
-                      <p className="myviews">
-                        {element.views >= 1e9
-                          ? `${(element.views / 1e9).toFixed(1)}B`
-                          : element.views >= 1e6
-                          ? `${(element.views / 1e6).toFixed(1)}M`
-                          : element.views >= 1e3
-                          ? `${(element.views / 1e3).toFixed(1)}K`
-                          : element.views}{" "}
-                        views
-                      </p>
-                      <p>&#x2022;</p>
-                      <p className="video_published-date">
-                        {(() => {
-                          const timeDifference =
-                            new Date() - new Date(element.uploaded_date);
-                          const minutes = Math.floor(timeDifference / 60000);
-                          const hours = Math.floor(timeDifference / 3600000);
-                          const days = Math.floor(timeDifference / 86400000);
-                          const weeks = Math.floor(timeDifference / 604800000);
-                          const years = Math.floor(
-                            timeDifference / 31536000000
-                          );
+                      <div className="keep-playlist-one">
+                        <div className="playlist-main-img">
+                          <img
+                            src={
+                              element.playlist_videos[0] !== undefined
+                                ? element.playlist_videos[0].thumbnail
+                                : deleteIMG
+                            }
+                            alt=""
+                            className="playlist-thumbnail"
+                            onClick={() => {
+                              window.location.href = `/video/${element.playlist_videos[0].videoID}`;
+                            }}
+                          />
+                        </div>
 
-                          if (minutes < 1) {
-                            return "just now";
-                          } else if (minutes < 60) {
-                            return `${minutes} mins ago`;
-                          } else if (hours < 24) {
-                            return `${hours} hours ago`;
-                          } else if (days < 7) {
-                            return `${days} days ago`;
-                          } else if (weeks < 52) {
-                            return `${weeks} weeks ago`;
-                          } else {
-                            return `${years} years ago`;
+                        <div
+                          className={
+                            theme
+                              ? "playlist-element"
+                              : "playlist-element text-dark-mode"
                           }
-                        })()}
-                      </p>
+                          style={{ backgroundColor }}
+                          onClick={() => {
+                            window.location.href = `/video/${element.playlist_videos[0].videoID}`;
+                          }}
+                        >
+                          <PlaylistPlayIcon
+                            fontSize="medium"
+                            style={{ color: "white" }}
+                          />
+                          <p>{element.playlist_videos.length} videos</p>
+                        </div>
+                      </div>
+
+                      <div className="playlistt-details">
+                        <p>{element.playlist_name}</p>
+                        <p
+                          onClick={() =>
+                            (window.location.href = `/playlist/${element._id}`)
+                          }
+                          className={
+                            theme
+                              ? "view-playlist2"
+                              : "view-playlist2-light text-light-mode2"
+                          }
+                        >
+                          View full playlist
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              );
-            })}
+                  </>
+                );
+              })}
+          </div>
         </div>
       </div>
     </>
   );
 }
 
-export default ChannelVideos;
+export default ChannelPlaylists;
