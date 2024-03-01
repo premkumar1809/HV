@@ -4,8 +4,14 @@
   [headers.values]
     Content-Type = "application/javascript"
 
+[[redirects]]
+  # Redirects for specific routes or files
+  from = "/studio/*"  # Adjust the path as needed
+  to = "/index.html"
+  status = 200
 
 [[redirects]]
+  # Catch-all redirect for everything else
   from = "/*"
   to = "/index.html"
   status = 200
