@@ -1,17 +1,19 @@
+[build]
+  base = "/opt/build/repo/frontend"
+  command = "npm run build"
+  publish = "dist"
+
 [[headers]]
-  # Set the correct Content-Type for JavaScript modules
   for = "/*.js"
   [headers.values]
     Content-Type = "application/javascript"
 
 [[redirects]]
-  # Redirects for specific routes or files
-  from = "/studio/*"  # Adjust the path as needed
+  from = "/studio/*"
   to = "/index.html"
   status = 200
 
 [[redirects]]
-  # Catch-all redirect for everything else
   from = "/*"
   to = "/index.html"
   status = 200
