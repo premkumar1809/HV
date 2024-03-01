@@ -1,13 +1,12 @@
-import { defineConfig } from 'vite'
-import React from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig } from 'vite';
+import React from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [React()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
+  build: {
+    rollupOptions: {
+      external: ['/src/main.jsx'],
     },
   },
-})
+});
