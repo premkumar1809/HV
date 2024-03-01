@@ -18,7 +18,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { BiSearch } from "react-icons/bi";
 
 function Navbar2() {
-  const backendURL = "https://youtube-clone-mern-backend.vercel.app"
+  const backendURL = "http://localhost:3000"
   const token = localStorage.getItem("userToken");
   const [email, setEmail] = useState();
   const [profilePic, setProfilePic] = useState();
