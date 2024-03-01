@@ -11,10 +11,12 @@ import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import Tooltip from "@mui/material/Tooltip";
 import Zoom from "@mui/material/Zoom";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+//import YouTubeIcon from "@mui/icons-material/YouTube";
+import TvIcon from '@mui/icons-material/Tv';
+
 
 function AccountPop() {
-  const backendURL = "https://youtube-clone-mern-backend.vercel.app"
+  const backendURL = "http://localhost:3000"
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [profile, setProfile] = useState("");
@@ -133,11 +135,11 @@ function AccountPop() {
               window.location.href = "/";
             }}
           >
-            <YouTubeIcon
+            <TvIcon
               fontSize="medium"
               style={{ color: theme ? "#909090" : "black" }}
             />
-            <p>YouTube</p>
+            <p>HOLE VIDEOS</p>
           </div>
           <div
             className={
