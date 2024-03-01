@@ -9,7 +9,7 @@
     Content-Type = "application/javascript"
 
 [[redirects]]
-  from = "/studio/*"
+  from = "/main/*"
   to = "/index.html"
   status = 200
 
