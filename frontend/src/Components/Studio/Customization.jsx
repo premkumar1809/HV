@@ -7,7 +7,7 @@ import jwtDecode from "jwt-decode";
 import Basic from "./Basic";
 
 function Customization() {
-  const backendURL = "https://youtube-clone-mern-backend.vercel.app"
+  const backendURL = "http://localhost:3000"
   const [currentTab, setCurrentTab] = useState("branding");
   const [email, setEmail] = useState();
   const [channelID, setChannelID] = useState();
