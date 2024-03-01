@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Reset() {
-  const backendURL = "http://localhost:3000"
+  const backendURL = "https://hv-95uq.onrender.com"
   const [email, setEmail] = useState("");
   const [BtnLoading, setBtnLoading] = useState(false);
   const [theme, setTheme] = useState(() => {
