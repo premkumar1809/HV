@@ -20,7 +20,7 @@ function generateRandomColors(count) {
 }
 
 function ChannelPlaylists(prop) {
-  const backendURL = "http://localhost:3000"
+  const backendURL = "https://hv-95uq.onrender.com"
   const [PlaylistData, setPlaylistData] = useState([]);
   const [email, setEmail] = useState();
   const [playlistColors, setPlaylistColors] = useState([]);
