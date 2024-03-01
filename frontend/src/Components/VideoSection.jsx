@@ -298,7 +298,7 @@ function VideoSection() {
     const getVideos = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3000/getvideos"
+          "https://hv-95uq.onrender.com/getvideos"
         );
         const {
           thumbnailURLs,
