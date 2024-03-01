@@ -25,6 +25,8 @@ app.use(Likes);
 app.use(Comments);
 app.use(Studio);
 
+// Set CORS headers for the root route
+router.options("/", cors()); // Enable preflight requests for the root route
 router.get("/", (req, res) => {
   res.send("Welcome to HOLE VIDEOS Backend!");
 });
