@@ -32,7 +32,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import LanguageIcon from "@mui/icons-material/Language";
 
 function Studio() {
-  const backendURL = "http://localhost:3000"
+  const backendURL = "https://hv-95uq.onrender.com"
   const [email, setEmail] = useState("");
   const [isChannel, setisChannel] = useState();
   const [selectedImage, setSelectedImage] = useState(null);
@@ -426,7 +426,7 @@ function Studio() {
       };
 
       // Proceed with saving the channel data
-      const response = await fetch("http://localhost:3000/savechannel", {
+      const response = await fetch("https://hv-95uq.onrender.com/savechannel", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -563,7 +563,7 @@ function Studio() {
           Visibility: visibility,
         };
         // Send the POST request
-        const response = await fetch("http://localhost:3000/publish", {
+        const response = await fetch("https://hv-95uq.onrender.com/publish", {
           method: "POST",
           body: JSON.stringify(data),
           headers: {
