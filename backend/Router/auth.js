@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const userData = require("../Models/user");
 const auth = express.Router();
 const nodemailer = require("nodemailer");
-const URL = "https://youtube-clone-mern-backend.vercel.app";
+const URL = "http://localhost:5173/";
 
 auth.post("/signup", async (req, res) => {
   try {
@@ -38,9 +38,9 @@ auth.post("/signup", async (req, res) => {
     });
 
     const mailOptions = {
-      from: "admin@shubho.youtube.app",
+      from: "HOLE VIDEOS",
       to: email,
-      subject: "Welcome to Shubho's YouTube Clone!",
+      subject: "Welcome to HOLE VIDEOS!",
       html: `
         <div style="font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px;">
           <h1 style="color: #333;">Welcome to Shubho's YouTube Clone!</h1>
