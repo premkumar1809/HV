@@ -1,4 +1,7 @@
+[build]
+  command = "npm install --force && npm run build"
+  publish = "build"
 [[redirects]]
-  from = "/main.jsx"
+  from = "/*"
   to = "/index.html"
   status = 200
