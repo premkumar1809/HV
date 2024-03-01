@@ -7,7 +7,7 @@ import jwtDecode from "jwt-decode";
 import Basic from "./Basic";
 
 function Customization() {
-  const backendURL = "http://localhost:3000"
+  const backendURL = "https://hv-95uq.onrender.com"
   const [currentTab, setCurrentTab] = useState("branding");
   const [email, setEmail] = useState();
   const [channelID, setChannelID] = useState();
