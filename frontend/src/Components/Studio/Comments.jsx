@@ -16,7 +16,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 function Comments() {
-  const backendURL = "http://localhost:3000"
+  const backendURL = "https://hv-95uq.onrender.com"
   const [Email, setEmail] = useState();
   const [AllComments, setAllComments] = useState([]);
   const [Profile, setProfile] = useState();
