@@ -11,14 +11,19 @@
     <script type="module" src="/src/main.jsx"></script>
     <script>
       const currentURL = window.location.href;
-      const local = "http://holevideos.netlify.app";
+      const local = "http://localhost:5173";
 
-      if (currentURL === `${local}/studio` ||
-          currentURL === `${local}/studio/video` ||
-          currentURL.includes(`/studio/comments`) ||
-          currentURL.includes(`/studio/video/comments`) ||
-          currentURL.includes(`/studio/video/edit`) ||
-          currentURL.includes(`/studio/customize`)) {
+      if (currentURL === `${local}/studio`) {
+        document.body.style.backgroundColor = "#30608c";
+      } else if (currentURL === `${local}/studio/video`) {
+        document.body.style.backgroundColor = "#30608c";
+      } else if (currentURL.includes(`/studio/comments`)) {
+        document.body.style.backgroundColor = "#30608c";
+      } else if (currentURL.includes(`/studio/video/comments`)) {
+        document.body.style.backgroundColor = "#30608c";
+      } else if (currentURL.includes(`/studio/video/edit`)) {
+        document.body.style.backgroundColor = "#30608c";
+      } else if (currentURL.includes(`/studio/customize`)) {
         document.body.style.backgroundColor = "#30608c";
       } else {
         document.body.style.backgroundColor = "#30608c";
