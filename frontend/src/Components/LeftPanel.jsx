@@ -37,7 +37,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { MdVideoLibrary } from "react-icons/md";
 
 function LeftPanel() {
-  const backendURL = "https://youtube-clone-mern-backend.vercel.app"
+  const backendURL = "http://localhost:3000"
   const [menuClicked, setMenuClicked] = useState(() => {
     const menu = localStorage.getItem("menuClicked");
     return menu ? JSON.parse(menu) : false;
@@ -525,25 +525,7 @@ function LeftPanel() {
               })}
           </div>
           <hr className={theme ? "seperate" : "seperate-light"} />
-          <Tooltip
-            TransitionComponent={Zoom}
-            title="Made with 💖 by Shubhojeet"
-            placement="bottom"
-          >
-            <div className="developer">
-              <CodeIcon
-                fontSize="medium"
-                style={{ color: theme ? "white" : "black" }}
-              />
-              <a
-                href="https://github.com/shubho0908"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Shubhojeet Bera 🚀
-              </a>
-            </div>
-          </Tooltip>
+          
         </div>
       </div>
 
@@ -1350,26 +1332,7 @@ function LeftPanel() {
                   );
                 })}
             </div>
-            <hr className={theme ? "seperate" : "seperate-light"} />
-            <Tooltip
-              TransitionComponent={Zoom}
-              title="Made with 💖 by Shubhojeet"
-              placement="bottom"
-            >
-              <div className="developer">
-                <CodeIcon
-                  fontSize="medium"
-                  style={{ color: theme ? "white" : "black" }}
-                />
-                <a
-                  href="https://github.com/shubho0908"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Shubhojeet Bera 🚀
-                </a>
-              </div>
-            </Tooltip>
+            
           </div>
         </div>
       </div>
