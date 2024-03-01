@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const userData = require("../Models/user");
 const auth = express.Router();
 const nodemailer = require("nodemailer");
-const URL = "http://localhost:5173/";
+const URL = "https://main--holevideos.netlify.app/";
 
 auth.post("/signup", async (req, res) => {
   try {
