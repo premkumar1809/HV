@@ -11,10 +11,11 @@ import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import Tooltip from "@mui/material/Tooltip";
 import Zoom from "@mui/material/Zoom";
-import {SiYoutubestudio} from "react-icons/si"
+//import {SiYoutubestudio} from "react-icons/si"
+import { MdOutlineSettingsSuggest } from "react-icons/md";
 
 function AccountPop() {
-  const backendURL = "https://youtube-clone-mern-backend.vercel.app"
+  const backendURL = "http://localhost:3000"
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [profile, setProfile] = useState("");
@@ -156,11 +157,11 @@ function AccountPop() {
               window.location.href = "/studio";
             }}
           >
-            <SiYoutubestudio
+            <MdOutlineSettingsSuggest
               fontSize="21px"
               style={{ color: theme ? "white" : "black" }}
             />
-            <p>YouTube Studio</p>
+            <p>HOLE VIDEOS Studio</p>
           </div>
           <div
             className={theme ? "apperance c-sec" : "apperance c-sec2"}
