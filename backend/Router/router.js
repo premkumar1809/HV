@@ -10,11 +10,13 @@ const Videos = require("./videos");
 const Likes = require("./likes");
 const Comments = require("./comments");
 const Studio = require("./studio");
+const app = express();
 
+app.use(cors());
 // Middlewares
 router.use(
   cors({
-    origin: ["https://shubho-youtube-mern.netlify.app"],
+    origin: ["http://localhost:5173"],
     methods: ["POST", "GET"],
     credentials: true,
   })
