@@ -23,7 +23,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function OtherChannel() {
-  const backendURL = "https://youtube-clone-mern-backend.vercel.app"
+  const backendURL = "http://localhost:3000"
   const { id } = useParams();
   const [Email, setEmail] = useState();
   const [newEmail, setnewEmail] = useState();
