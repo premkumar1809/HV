@@ -16,7 +16,7 @@ import TvIcon from '@mui/icons-material/Tv';
 
 
 function AccountPop() {
-  const backendURL = "http://localhost:3000"
+  const backendURL = "https://hv-95uq.onrender.com"
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [profile, setProfile] = useState("");
