@@ -25,7 +25,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Content() {
-  const backendURL = "https://youtube-clone-mern-backend.vercel.app"
+  const backendURL = "http://localhost:3000"
   const [userVideos, setUserVideos] = useState([]);
   const [sortByDateAsc, setSortByDateAsc] = useState(true);
   const [Email, setEmail] = useState();
@@ -35,7 +35,7 @@ function Content() {
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
   const [DeleteVideoData, setDeleteVideoData] = useState();
   const [boxclicked, setBoxClicked] = useState(false);
-  const videoUrl = "https://shubho-youtube-mern.netlify.app/video";
+  const videoUrl = "http://localhost:5173/video";
   const [loading, setLoading] = useState(true);
   const [menu, setmenu] = useState(() => {
     const menu = localStorage.getItem("studioMenuClicked");
@@ -801,7 +801,7 @@ function Content() {
             }
           />
           <p>
-            I understand that deleting a video from YouTube is permanent and
+            I understand that deleting a video from HOLE VIDEOS is permanent and
             cannot be undone.
           </p>
         </div>
