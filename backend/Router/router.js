@@ -16,7 +16,7 @@ app.use(cors());
 // Middlewares
 router.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["https://main--holevideos.netlify.app/"],
     methods: ["POST", "GET"],
     credentials: true,
   })
