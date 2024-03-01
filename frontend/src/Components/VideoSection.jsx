@@ -36,7 +36,7 @@ import LeftPanel from "./LeftPanel";
 import Error from "./Error";
 
 function VideoSection() {
-  const backendURL = "http://localhost:3000";
+  const backendURL = "https://hv-95uq.onrender.com";
   const { id } = useParams();
   const [videoData, setVideoData] = useState(null);
   const [email, setEmail] = useState();
