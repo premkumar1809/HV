@@ -1,24 +1,29 @@
-require("dotenv").config()
+// Require dotenv at the top
+require("dotenv").config();
+
 const mongoose = require("mongoose");
 
-mongoose
-  .connect(
-    `mongodb+srv://${process.env.DB_user}:${process.env.DB_password}@cluster0.f9aqief.mongodb.net/${process.env.DB_name}?retryWrites=true&w=majority`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
-  .then(() => console.log("Connected")) //If connected to DB
-  .catch((err) => console.log(err)); //If not connected to DB
+// Construct a more readable connection string
+const connectionStr = `mongodb+srv://litilas277:jJqlEw0MO6mTAmrL@cluster0.pjehyff.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
-// mongoose
-//   .connect(
-//     `mongodb://127.0.0.1:27017/${process.env.DB_name}?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0`,
-//     {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//     }
-//   )
-//   .then(() => console.log("Connected")) //If connected to DB
-//   .catch((err) => console.log(err)); //If not connected to DB
+// Use options for better readability
+const mongooseOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
+
+// Connect to MongoDB
+mongoose.connect(connectionStr, mongooseOptions)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("Error connecting to MongoDB:", err));
+
+
+//mongoose
+  //.connect(
+    // `mongodb://127.0.0.1:27017/${process.env.DB_name}?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0`,
+     //{       useNewUrlParser: true,
+      // useUnifiedTopology: true,
+     //}
+  //)
+  // .then(() => console.log("Connected")) //If connected to DB
+   
