@@ -1,2 +1,4 @@
-/*    /index.html   200
-# Other redirects or rules go here
+[[redirects]]
+  from = "/main.jsx"
+  to = "/index.html"
+  status = 200
