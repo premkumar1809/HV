@@ -24,7 +24,7 @@ import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import jwtDecode from "jwt-decode";
-import Signin from "./Signin";
+import Signin from "./Signin"; 
 import Signup from "./Signup";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -34,10 +34,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LeftPanel from "./LeftPanel";
 import Error from "./Error";
-import plyrAds from 'plyr-ads';
 
-
-function VideoSection( ) {
+function VideoSection() {
   const backendURL = "https://hv-95uq.onrender.com";
   const { id } = useParams();
   const [videoData, setVideoData] = useState(null);
@@ -300,7 +298,7 @@ function VideoSection( ) {
     const getVideos = async () => {
       try {
         const response = await fetch(
-          "https://hv-95uq.onrender.com/getvideos"
+          "http://localhost:3000/getvideos"
         );
         const {
           thumbnailURLs,
@@ -1051,43 +1049,9 @@ function VideoSection( ) {
       </>
     );
   }
- //videoplayer adds
+  
 
-useEffect(() => {
-    const initializePlyr = () => {
-      if (!plyrInitialized && videoRef.current) {
-        const player = new Plyr(videoRef.current, {
-          controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-          // Add any other Plyr configuration options you need
-        });
-
-        // Enable Ads
-        plyrAds.setup(player, {
-          debug: true, // Enable debug mode
-          ads: {
-            enabled: true,
-            publisherId: '22572239', // Replace with your actual publisher ID
-            tagUrl: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765', // Replace with your actual VAST ad tag URL
-          },
-        });
-
-        setPlyrInitialized(true);
-      }
-    };
-
-    const destroyPlyr = () => {
-      if (plyrInitialized && videoRef.current) {
-        videoRef.current.plyr.destroy();
-        setPlyrInitialized(false);
-      }
-    };
-
-    if (videoRef && videoRef.current) {
-      initializePlyr();
-    }
-
-    return () => destroyPlyr();
-  }, [plyrInitialized]);
+  
 
   return (
     <>
@@ -1106,13 +1070,14 @@ useEffect(() => {
           <div className="videoframe">
             <video
               className="play-video"
+              controls
+              data-plyr-config='{ "title": "Example Title", "ads": { "enabled": true, "publisherId": "your-publisher-id", "adTagUrl": "https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765" } }'
               ref={videoRef}
               poster={thumbnailURL}
-              >
-              <source src={videoURL} type="video/mp4" />
               
+            >
+              <source src={videoURL} type="video/mp4" />
             </video>
-            
           </div>
           <p
             className={theme ? "trending-tag" : "trending-tag-light"}
