@@ -34,6 +34,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LeftPanel from "./LeftPanel";
 import Error from "./Error";
+import plyrAds from 'plyr-ads';
 
 
 function VideoSection( ) {
@@ -1052,56 +1053,41 @@ function VideoSection( ) {
   }
  //videoplayer adds
 
-  useEffect(() => {
-    let player;
+useEffect(() => {
+    const initializePlyr = () => {
+      if (!plyrInitialized && videoRef.current) {
+        const player = new Plyr(videoRef.current, {
+          controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+          // Add any other Plyr configuration options you need
+        });
 
-    const initializePlayer = () => {
-      player = new Plyr(videoRef.current, {
-        // Plyr configuration options
-        controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-      });
+        // Enable Ads
+        plyrAds.setup(player, {
+          debug: true, // Enable debug mode
+          ads: {
+            enabled: true,
+            publisherId: '22572239', // Replace with your actual publisher ID
+            tagUrl: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765', // Replace with your actual VAST ad tag URL
+          },
+        });
 
-      // Event listener for when the video is ready to play
-      player.on('canplay', () => {
-        // Load and display your ads here
-        loadAds();
-      });
-
-      // Event listener for when the video ends
-      player.on('ended', () => {
-        // Perform actions when the video ends
-        // Example: showPostRollAds();
-      });
-    };
-
-    const loadAds = () => {
-      // Replace with your actual ad tag
-      const adTag = 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765';
-
-      // Create the ad display container
-      const adDisplayContainer = new google.ima.AdDisplayContainer(document.getElementById('ad-container'), player);
-
-      // Set up the ad loader
-      const adsLoader = new google.ima.AdsLoader(adDisplayContainer);
-
-      // Set up the ads request
-      const adsRequest = new google.ima.AdsRequest();
-      adsRequest.adTagUrl = adTag;
-
-      // Request ads
-      adsLoader.requestAds(adsRequest);
-    };
-
-    // Load Plyr and initialize the player
-    initializePlayer();
-
-   return () => {
-      // Cleanup Plyr player when the component is unmounted
-      if (player) {
-        player.destroy();
+        setPlyrInitialized(true);
       }
     };
-  }, []);
+
+    const destroyPlyr = () => {
+      if (plyrInitialized && videoRef.current) {
+        videoRef.current.plyr.destroy();
+        setPlyrInitialized(false);
+      }
+    };
+
+    if (videoRef && videoRef.current) {
+      initializePlyr();
+    }
+
+    return () => destroyPlyr();
+  }, [plyrInitialized]);
 
   return (
     <>
@@ -1120,16 +1106,13 @@ function VideoSection( ) {
           <div className="videoframe">
             <video
               className="play-video"
-              controls
-             
               ref={videoRef}
               poster={thumbnailURL}
-             
-            >
+              >
               <source src={videoURL} type="video/mp4" />
               
             </video>
-            <div id="ad-container"></div>
+            
           </div>
           <p
             className={theme ? "trending-tag" : "trending-tag-light"}
