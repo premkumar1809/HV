@@ -1064,7 +1064,7 @@ function VideoSection({  adTagUrl }) {
       player.destroy();
       plyrAds.destroy();
     };
-  }, [videoRef, adTagUrl]);
+  }, [videoRef, adTagUrl])
 
   
 
