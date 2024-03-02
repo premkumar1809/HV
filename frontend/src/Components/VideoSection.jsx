@@ -1068,8 +1068,8 @@ function VideoSection() {
           <div className="videoframe">
             <video
               className="play-video"
-              controls
               data-plyr-config='{ "title": "holevideos.netlify.app", "ads": { "enabled": true, "publisherId": "22572239", "adTagUrl": "https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765" } }'
+              controls
               ref={videoRef}
               poster={thumbnailURL}
              
