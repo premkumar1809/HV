@@ -1055,11 +1055,10 @@ function VideoSection({  adTagUrl }) {
       controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
     });
 
-    plyrAds.setup(player, {
-      adTagUrl: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
-      // other PlyrAds options
-    });
-  }, []);
+   plyrAds.setup(player, {
+  adTagUrl: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765'
+  // other PlyrAds options
+});
    return () => {
       player.destroy();
       plyrAds.destroy();
