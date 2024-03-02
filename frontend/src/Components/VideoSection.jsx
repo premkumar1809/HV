@@ -1068,8 +1068,17 @@ function VideoSection() {
           <div className="videoframe">
             <video
               className="play-video"
-              data-plyr-config='{ "title": "holevideos.netlify.app", "ads": { "enabled": true, "publisherId": "22572239", "adTagUrl": "https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765" } }'
               controls
+              "data-plyr-config='{
+  
+  "ads": {
+    "enabled": true,
+    "publisherId": "3623574",
+    "adTagUrl": "https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765",
+    "adDuration": 15
+  }
+}'"
+
               ref={videoRef}
               poster={thumbnailURL}
              
