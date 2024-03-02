@@ -36,7 +36,7 @@ import LeftPanel from "./LeftPanel";
 import Error from "./Error";
 import plyrAds from 'plyr-ads';
 
-function VideoSection({ thumbnailURL, videoURL, adTagUrl, theme }) {
+function VideoSection({  adTagUrl }) {
   const backendURL = "https://hv-95uq.onrender.com";
   const { id } = useParams();
   const [videoData, setVideoData] = useState(null);
