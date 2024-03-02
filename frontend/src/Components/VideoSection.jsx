@@ -1080,7 +1080,7 @@ function VideoSection() {
             <video
               className="play-video"
               controls
-              data-plyr-config='{  "ads": { "enabled": true, "publisherId": "22572239", "adTagUrl": "https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b076=" } }'
+              data-plyr-config='{  "ads": { "enabled": true, "publisherId": "22572239", "adTagUrl": "https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b076" } }'
               ref={videoRef}
               poster={thumbnailURL}
              
