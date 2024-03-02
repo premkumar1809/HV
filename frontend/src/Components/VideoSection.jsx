@@ -1070,6 +1070,7 @@ function VideoSection() {
               controls
               ref={videoRef}
               poster={thumbnailURL}
+               data-setup='{"ads": {"adTagUrl": "https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765", "adTimeout": 30}}'
             >
               <source src={videoURL} type="video/mp4" />
               
