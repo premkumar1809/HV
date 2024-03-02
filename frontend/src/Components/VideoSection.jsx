@@ -34,6 +34,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LeftPanel from "./LeftPanel";
 import Error from "./Error";
+import plyrAds from 'plyr-ads';
 
 function VideoSection() {
   const backendURL = "https://hv-95uq.onrender.com";
@@ -1049,6 +1050,16 @@ function VideoSection() {
       </>
     );
   }
+   useEffect(() => {
+    const player = new Plyr(videoRef.current, {
+      controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+    });
+
+    plyrAds.setup(player, {
+      adTagUrl: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
+      // other PlyrAds options
+    });
+  }, []);
   
 
   return (
@@ -1069,7 +1080,7 @@ function VideoSection() {
             <video
               className="play-video"
               controls
-              data-plyr-config='{  "ads": { "enabled": true, "publisherId": "22572239", "adTagUrl": "https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=" } }'
+              data-plyr-config='{  "ads": { "enabled": true, "publisherId": "22572239", "adTagUrl": "https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b076=" } }'
               ref={videoRef}
               poster={thumbnailURL}
              
