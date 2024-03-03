@@ -1088,7 +1088,7 @@ function VideoSection() {
         <div className="left-video-section2">
           <div className="videoframe">
           <video ref={videoRef}
-            className="play-video"
+            className="fluid-player"
              controls
             poster={thumbnailURL}
             >
