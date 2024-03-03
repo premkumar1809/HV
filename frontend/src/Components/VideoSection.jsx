@@ -296,6 +296,8 @@ function VideoSection() {
 
     getVideoData();
   }, [id]);
+  
+  
 
   useEffect(() => {
     const getVideos = async () => {
@@ -327,7 +329,28 @@ function VideoSection() {
     getVideos();
   }, []);
 
- 
+ //fluid player ads
+  useEffect(() => {
+    const options = {
+      vastOptions: {
+        allowVPAID: true,
+        adList: [
+          {
+            roll: 'preRoll',
+            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
+          },
+          {
+            roll: 'midRoll',
+            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
+            timer: 5,
+          },
+        ],
+      },
+    };
+
+    fluidPlayer(videoRef.current, options);
+  }, [videoData]);
+
 
   useEffect(() => {
     const getLikes = async () => {
@@ -1040,28 +1063,7 @@ function VideoSection() {
   }
   
 
-  //fluid player ads
-  useEffect(() => {
-    const options = {
-      vastOptions: {
-        allowVPAID: true,
-        adList: [
-          {
-            roll: 'preRoll',
-            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
-          },
-          {
-            roll: 'midRoll',
-            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
-            timer: 5,
-          },
-        ],
-      },
-    };
-
-    fluidPlayer(videoRef.current, options);
-  }, []);
-
+  
   return (
     <>
       <div className="my-navbar">
