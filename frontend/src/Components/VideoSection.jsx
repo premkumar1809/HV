@@ -44,7 +44,7 @@ function VideoSection() {
   const [videoData, setVideoData] = useState(null);
   const [email, setEmail] = useState();
   const [channelName, setChannelName] = useState();
-  const [fluidPlayerInitialized, setFluidPlayer]=useState(false);
+  const [fluidPlayerInitialized, setFluidPlayerInitialized] = useState(false);
   const [Display, setDisplay] = useState("none");
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
