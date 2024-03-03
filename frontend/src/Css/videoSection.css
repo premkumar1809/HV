@@ -1,4 +1,5 @@
-@import "~fluid-player/src/css/fluidplayer.css";
+@import "fluid-player/src/css/fluidplayer.css";
+
 .videoframe {
   width: inherit;
 }
