@@ -36,7 +36,6 @@ import LeftPanel from "./LeftPanel";
 import Error from "./Error";
 
 import fluidPlayer from 'fluid-player';
-import 'fluid-player/dist/fluidplayer.min.css';
 
 
 function VideoSection() {
