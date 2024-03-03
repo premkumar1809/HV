@@ -4,33 +4,35 @@
   width: inherit;
 }
 
-/* PLAYER CONTROLS */
-
-.plyr--red,
-.plyr__control--overlaid {
+/* Customize the player controls background */
+.fluid-player .fluid-ui video::-webkit-media-controls-panel,
+.fluid-player .fluid-ui video::-webkit-media-controls {
   background: red !important;
 }
 
-.plyr--full-ui input[type="range"] {
+/* Adjust the color of the range input in the full UI */
+.fluid-player .fluid-ui input[type="range"] {
   color: red !important;
 }
 
-.plyr--video .plyr__control:focus-visible,
-.plyr--video,
-.plyr--video .plyr__control[aria-expanded="true"] {
+/* Styles for focus on Fluid Player controls */
+.fluid-player .fluid-ui video:focus,
+.fluid-player .fluid-ui video:focus-visible,
+.fluid-player .fluid-ui video[aria-expanded="true"] {
   background: none !important;
 }
 
-.plyr {
+/* Set the width and height of the Fluid Player container */
+.fluid-player {
   width: inherit;
   height: 720px;
 }
 
-.plyr__control:hover {
+/* Customize hover styles for Fluid Player controls */
+.fluid-player .fluid-ui video:hover {
   background: none !important;
   color: #4a5464 !important;
 }
-
 .main-video-section {
   background-color: #30608c;
   height: auto;
