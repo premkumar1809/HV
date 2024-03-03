@@ -327,21 +327,7 @@ function VideoSection() {
     getVideos();
   }, []);
 
-  useEffect(() => {
-    const initializePlyr = () => {
-      if (!plyrInitialized && videoRef.current) {
-        const player = new Plyr(videoRef.current, {
-          background: "red",
-          ratio: null,
-        });
-        setPlyrInitialized(true);
-      }
-    };
-
-    if (videoData && videoData.VideoData) {
-      initializePlyr();
-    }
-  }, [plyrInitialized, videoData]);
+ 
 
   useEffect(() => {
     const getLikes = async () => {
