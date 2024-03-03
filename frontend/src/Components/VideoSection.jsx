@@ -1089,7 +1089,7 @@ function VideoSection() {
           <div className="videoframe">
           <video ref={videoRef}>
         <source
-          src={videoData.videoURL}
+          src={videoURL}
           data-fluid-hd
           title="1080p"
           type="video/mp4"
