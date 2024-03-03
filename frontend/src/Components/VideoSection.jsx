@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-//import Plyr from "plyr";
+
 import Navbar from "./Navbar";
 import Share from "./Share";
 import "../Css/videoSection.css";
-//import "plyr/dist/plyr.css";
+
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Tooltip from "@mui/material/Tooltip";
 import AddToPhotosOutlinedIcon from "@mui/icons-material/AddToPhotosOutlined";
@@ -44,7 +44,7 @@ function VideoSection() {
   const [videoData, setVideoData] = useState(null);
   const [email, setEmail] = useState();
   const [channelName, setChannelName] = useState();
-  //const [plyrInitialized, setPlyrInitialized] = useState(false);
+  
   const [Display, setDisplay] = useState("none");
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
