@@ -44,7 +44,7 @@ function VideoSection() {
   const [videoData, setVideoData] = useState(null);
   const [email, setEmail] = useState();
   const [channelName, setChannelName] = useState();
-  
+  const [fluidPlayerInitialized, setFluidPlayer]=useState(false);
   const [Display, setDisplay] = useState("none");
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
@@ -330,26 +330,34 @@ function VideoSection() {
   }, []);
 
  //fluid player ads
-  useEffect(() => {
-    const options = {
-      vastOptions: {
-        allowVPAID: true,
-        adList: [
-          {
-            roll: 'preRoll',
-            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
+    useEffect(() => {
+    const initializeFluidPlayer = () => {
+      if (!fluidPlayerInitialized && videoRef.current instanceof HTMLVideoElement) {
+        const options = {
+          vastOptions: {
+            allowVPAID: true,
+            adList: [
+              {
+                roll: 'preRoll',
+                vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
+              },
+              {
+                roll: 'midRoll',
+                vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
+                timer: 5,
+              },
+            ],
           },
-          {
-            roll: 'midRoll',
-            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
-            timer: 5,
-          },
-        ],
-      },
+        };
+        
+        fluidPlayer(videoRef.current, options);
+        setFluidPlayerInitialized(true);
+      }
     };
 
-    fluidPlayer(videoRef.current, options);
-  }, [videoData]);
+    initializeFluidPlayer();
+  }, [fluidPlayerInitialized, videoData]);
+
 
 
   useEffect(() => {
@@ -1081,7 +1089,7 @@ function VideoSection() {
           <div className="videoframe">
           <video ref={videoRef}>
         <source
-          src={videoURL}
+          src={videoData.videoURL}
           data-fluid-hd
           title="1080p"
           type="video/mp4"
