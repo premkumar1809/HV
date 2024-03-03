@@ -1092,17 +1092,7 @@ function VideoSection() {
       >
         <div className="left-video-section2">
           <div className="videoframe">
-           // <video
-             // className="play-video"
-              //controls
-              //data-plyr-config='{ "title": "Example Title", "ads": { "enabled": true, "publisherId": "your-publisher-id", "adTagUrl": "https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765" } }'
-              //ref={videoRef}
-              //poster={thumbnailURL}
-              
-            //>
-              //<source src={videoURL} type="video/mp4" />
-            //</video>
-                 <video ref={videoRef}>
+          <video ref={videoRef}>
         <source
           src={videoURL}
           data-fluid-hd
