@@ -1087,11 +1087,13 @@ function VideoSection() {
       >
         <div className="left-video-section2">
           <div className="videoframe">
-          <video ref={videoRef}>
+          <video ref={videoRef}
+            className="play-video"
+             controls
+            poster={thumbnailURL}
+            >
         <source
           src={videoURL}
-          data-fluid-hd
-          title="1080p"
           type="video/mp4"
         />
       </video>
