@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import Plyr from "plyr";
+//import Plyr from "plyr";
 import Navbar from "./Navbar";
 import Share from "./Share";
 import "../Css/videoSection.css";
-import "plyr/dist/plyr.css";
+//import "plyr/dist/plyr.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Tooltip from "@mui/material/Tooltip";
 import AddToPhotosOutlinedIcon from "@mui/icons-material/AddToPhotosOutlined";
@@ -35,13 +35,17 @@ import "react-toastify/dist/ReactToastify.css";
 import LeftPanel from "./LeftPanel";
 import Error from "./Error";
 
+import fluidPlayer from 'fluid-player';
+import 'fluid-player/dist/fluidplayer.min.css';
+
+
 function VideoSection() {
   const backendURL = "https://hv-95uq.onrender.com";
   const { id } = useParams();
   const [videoData, setVideoData] = useState(null);
   const [email, setEmail] = useState();
   const [channelName, setChannelName] = useState();
-  const [plyrInitialized, setPlyrInitialized] = useState(false);
+  //const [plyrInitialized, setPlyrInitialized] = useState(false);
   const [Display, setDisplay] = useState("none");
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
@@ -1051,7 +1055,27 @@ function VideoSection() {
   }
   
 
-  
+  //fluid player ads
+  useEffect(() => {
+    const options = {
+      vastOptions: {
+        allowVPAID: true,
+        adList: [
+          {
+            roll: 'preRoll',
+            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
+          },
+          {
+            roll: 'midRoll',
+            vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
+            timer: 5,
+          },
+        ],
+      },
+    };
+
+    fluidPlayer(videoRef.current, options);
+  }, []);
 
   return (
     <>
@@ -1068,16 +1092,26 @@ function VideoSection() {
       >
         <div className="left-video-section2">
           <div className="videoframe">
-            <video
-              className="play-video"
-              controls
-              data-plyr-config='{ "title": "Example Title", "ads": { "enabled": true, "publisherId": "your-publisher-id", "adTagUrl": "https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765" } }'
-              ref={videoRef}
-              poster={thumbnailURL}
+           // <video
+             // className="play-video"
+              //controls
+              //data-plyr-config='{ "title": "Example Title", "ads": { "enabled": true, "publisherId": "your-publisher-id", "adTagUrl": "https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765" } }'
+              //ref={videoRef}
+              //poster={thumbnailURL}
               
-            >
-              <source src={videoURL} type="video/mp4" />
-            </video>
+            //>
+              //<source src={videoURL} type="video/mp4" />
+            //</video>
+                 <video ref={videoRef}>
+        <source
+          src={videoURL}
+          data-fluid-hd
+          title="1080p"
+          type="video/mp4"
+        />
+      </video>
+
+                
           </div>
           <p
             className={theme ? "trending-tag" : "trending-tag-light"}
