@@ -340,11 +340,12 @@ function VideoSection() {
               {
                 roll: 'preRoll',
                 vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
+                 timer: 15,
               },
               {
                 roll: 'midRoll',
                 vastTag: 'https://www.videosprofitnetwork.com/watch.xml?key=ff70a984693296dafd6c8ec3361b0765',
-                timer: 5,
+                timer: 15,
               },
             ],
           },
