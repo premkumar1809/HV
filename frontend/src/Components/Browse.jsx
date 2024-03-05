@@ -79,18 +79,18 @@ function Browse() {
 
   const Tags = [
     "All",
-    "Lesbian",
-    "Gay",
-    "Gangbang",
     "Anal",
     "Hot",
-    "BDSM",
     "Beauty",
     "Leaked Videos",
     "BigBoobs",
     "Bigcock",
     "Mastubation",
     "Blow job",
+    "Lesbian",
+    "Gay",
+    "Gangbang",
+     "BDSM",
   ];
 
   useEffect(() => {
